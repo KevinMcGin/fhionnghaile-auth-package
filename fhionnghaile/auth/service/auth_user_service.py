@@ -1,4 +1,4 @@
-import com.fhionnghaile.auth.repository.auth_user as auth_user_repo
+import fhionnghaile.auth.repository.auth_user as auth_user_repo
 
 def save_auth_user(auth_user):
     return to_response(
