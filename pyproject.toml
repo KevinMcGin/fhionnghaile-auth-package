@@ -1,9 +1,6 @@
 name = "fhionnghaile-auth-package"
 version = "0.0.1"
 dependencies = [
-    "flask-sqlalchemy",
-    "psycopg2-binary",
-    "python-dotenv",
     "git+https://github.com/KevinMcGin/fhionnghaile-sqlalchemy-database.git",
 ]
 requires-python = ">= 3.0"
