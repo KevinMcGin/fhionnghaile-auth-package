@@ -1,4 +1,4 @@
-import fhionnghaile.auth.repository.anonymous_user as anonymous_user_repo
+import fhionnghaile_auth.repository.anonymous_user as anonymous_user_repo
 
 def save_anonymous_user(anonymous_user):
     return to_response(

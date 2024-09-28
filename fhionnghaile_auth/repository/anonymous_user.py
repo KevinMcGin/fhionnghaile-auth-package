@@ -1,4 +1,4 @@
-from fhionnghaile.database.repository.database import db
+from fhionnghaile_database.repository.database import db
 from datetime import datetime
 
 class AnonymousUser(db.Model):
