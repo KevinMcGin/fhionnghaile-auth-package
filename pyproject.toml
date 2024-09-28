@@ -5,4 +5,6 @@ dependencies = [
     "psycopg2-binary",
     "python-dotenv",
 ]
+requires-python = ">= 3.0"
+description = "A package for authentication and anonymous access resources"
 
