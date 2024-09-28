@@ -1,4 +1,4 @@
-# fhionngahile-auth-package
+# fhionnghaile-auth-package
 
 ## settable environment variables
 
