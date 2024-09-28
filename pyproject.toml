@@ -1,0 +1,8 @@
+name = "fhionngahile-auth-package"
+version = "0.0.1"
+dependencies = [
+    "flask-sqlalchemy",
+    "psycopg2-binary",
+    "python-dotenv",
+]
+
