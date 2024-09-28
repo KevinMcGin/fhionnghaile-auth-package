@@ -1,7 +1,6 @@
 name = "fhionnghaile-auth-package"
 version = "0.0.1"
 dependencies = [
-    "git+https://github.com/KevinMcGin/fhionnghaile-sqlalchemy-database.git",
 ]
 requires-python = ">= 3.0"
 description = "A package for authentication and anonymous access resources"
