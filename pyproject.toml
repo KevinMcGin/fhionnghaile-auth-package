@@ -4,6 +4,7 @@ dependencies = [
     "flask-sqlalchemy",
     "psycopg2-binary",
     "python-dotenv",
+    "git+https://github.com/KevinMcGin/fhionnghaile-sqlalchemy-database.git",
 ]
 requires-python = ">= 3.0"
 description = "A package for authentication and anonymous access resources"
