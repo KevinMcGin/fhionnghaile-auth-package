@@ -14,6 +14,7 @@ def token_required(authentication_required=False):
         current_user = None
         print("auth url is:", AUTH_SERVICE_URL + "/api/auth")
         print("current_user_response is:", current_user_response)
+        print("response is:", current_user_response.json())
         if current_user_response.status_code == 200:
             current_user = current_user_response.json()
         else:
