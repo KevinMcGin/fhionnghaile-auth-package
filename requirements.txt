@@ -1,3 +1,4 @@
 flask-sqlalchemy
 psycopg2-binary
 python-dotenv
+git+https://github.com/KevinMcGin/fhionnghaile-sqlalchemy-database.git
