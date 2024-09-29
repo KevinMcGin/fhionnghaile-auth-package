@@ -13,7 +13,7 @@ def token_required(authentication_required=False):
         try:
             current_user_response = requests.post(
                 auth_uri, 
-                headers=headers,
+                # headers=headers,
                 timeout=30,
             )
         except Exception as e:
