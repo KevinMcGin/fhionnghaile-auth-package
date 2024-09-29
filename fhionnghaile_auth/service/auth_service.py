@@ -12,6 +12,7 @@ def token_required(authentication_required=False):
         current_user_response = requests.post(
             auth_uri, 
             headers=headers,
+            timeout=10,
         )
         current_user = None
         print("current_user_response is:", current_user_response)
