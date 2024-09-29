@@ -13,7 +13,10 @@ def token_required(authentication_required=False):
         try:
             current_user_response = requests.post(
                 auth_uri, 
-                # headers=headers,
+                headers={
+                    "Authorization": headers.get("Authorization"),
+                    "Anonymous-User-Id": headers.get("Anonymous-User-Id"),
+                },
                 timeout=30,
             )
         except Exception as e:
@@ -35,7 +38,7 @@ def token_required(authentication_required=False):
                 "error": "Unauthorized"
             } 
         print("current_user is this:", current_user)
-        if authentication_required and not current_user["auth"]:
+        if authentication_required and not "auth" in current_user:
             return {
                 "message": "Authentication Token failed!",
                 "data": None,
