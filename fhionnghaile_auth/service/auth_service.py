@@ -7,12 +7,12 @@ import os
 def token_required(authentication_required=False):
     def get_current_user(headers, authentication_required):
         AUTH_SERVICE_URL = os.environ.get('AUTH_SERVICE_URL', 'http://localhost:8885')
+        print("auth url is:", AUTH_SERVICE_URL + "/api/auth")
         current_user_response = requests.post(
             AUTH_SERVICE_URL + "/api/auth", 
             headers=headers,
         )
         current_user = None
-        print("auth url is:", AUTH_SERVICE_URL + "/api/auth")
         print("current_user_response is:", current_user_response)
         print("response is:", current_user_response.text)
         if current_user_response.status_code == 200:
