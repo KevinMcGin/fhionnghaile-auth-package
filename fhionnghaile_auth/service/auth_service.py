@@ -9,11 +9,20 @@ def token_required(authentication_required=False):
         AUTH_SERVICE_URL = os.environ.get('AUTH_SERVICE_URL', 'http://localhost:8885')
         auth_uri = AUTH_SERVICE_URL + "/api/auth"
         print("auth uri is:", auth_uri)
-        current_user_response = requests.post(
-            auth_uri, 
-            headers=headers,
-            timeout=30,
-        )
+        current_user_response = None
+        try:
+            current_user_response = requests.post(
+                auth_uri, 
+                headers=headers,
+                timeout=30,
+            )
+        except Exception as e:
+            print("Error occurred while authenticating user:", e)
+            return {
+                "message": "Authentication failed",
+                "data": None,
+                "error": "Unauthorized"
+            }
         current_user = None
         print("current_user_response is:", current_user_response)
         print("response is:", current_user_response.text)
