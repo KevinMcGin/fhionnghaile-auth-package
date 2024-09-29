@@ -17,7 +17,7 @@ def token_required(authentication_required=False):
                     "Authorization": headers.get("Authorization"),
                     "Anonymous-User-Id": headers.get("Anonymous-User-Id"),
                 },
-                timeout=30,
+                timeout=120,
             )
         except Exception as e:
             print("Error occurred while authenticating user:", e)
