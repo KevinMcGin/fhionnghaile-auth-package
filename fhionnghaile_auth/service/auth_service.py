@@ -2,6 +2,7 @@ from functools import wraps
 from flask import request
 import requests 
 import os
+import time
 
 
 def token_required(authentication_required=False):
@@ -11,14 +12,24 @@ def token_required(authentication_required=False):
         print("auth uri is:", auth_uri)
         current_user_response = None
         try:
-            current_user_response = requests.post(
-                auth_uri, 
-                headers={
-                    "Authorization": headers.get("Authorization"),
-                    "Anonymous-User-Id": headers.get("Anonymous-User-Id"),
-                },
-                timeout=30,
-            )
+            status_code = 1000
+            attempts = 0
+            maxAttempts = 3
+            sleepPerAttemptSeconds = 1
+            while status_code >= 300 and attempts < maxAttempts:
+                attempts += 1
+                current_user_response = requests.post(
+                    auth_uri, 
+                    headers={
+                        "Authorization": headers.get("Authorization"),
+                        "Anonymous-User-Id": headers.get("Anonymous-User-Id"),
+                    },
+                    timeout=30,
+                )
+                status_code = current_user_response.status_code
+                if status_code >= 300:
+                    print("Retrying authentication due to status code:", status_code)
+                    time.sleep(sleepPerAttemptSeconds * attempts)
         except Exception as e:
             print("Error occurred while authenticating user:", e)
             return {
