@@ -12,11 +12,12 @@ def token_required(authentication_required=False):
         print("auth uri is:", auth_uri)
         current_user_response = None
         try:
+            auth_fail_status = 401
             status_code = 1000
             attempts = 0
             maxAttempts = 3
             sleepPerAttemptSeconds = 1
-            while status_code >= 300 and attempts < maxAttempts:
+            while status_code > auth_fail_status and attempts < maxAttempts:
                 attempts += 1
                 current_user_response = requests.post(
                     auth_uri, 
@@ -27,7 +28,7 @@ def token_required(authentication_required=False):
                     timeout=30,
                 )
                 status_code = current_user_response.status_code
-                if status_code >= 300:
+                if status_code > auth_fail_status:
                     print("Retrying authentication due to status code:", status_code)
                     time.sleep(sleepPerAttemptSeconds * attempts)
         except Exception as e:
