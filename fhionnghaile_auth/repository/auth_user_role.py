@@ -19,7 +19,7 @@ class AuthUserRole(db.Model):
         self.auth_user_id = auth_user_id 
 
 def get_roles_by_user_id(auth_user_id):
-    return AuthUserRole.select(
+    return db.select(
         AuthUserRole.auth_role
     ).filter_by(
         auth_user_id=auth_user_id
