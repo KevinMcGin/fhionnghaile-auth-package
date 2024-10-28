@@ -1,6 +1,5 @@
 from fhionnghaile_database.repository.database import db
 from sqlalchemy.dialects.postgresql import UUID
-import uuid
 
 class AuthRole(db.Model):
     __tablename__ = 'inf_auth_role'
