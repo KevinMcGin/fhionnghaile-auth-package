@@ -1,4 +1,5 @@
 import fhionnghaile_auth.repository.auth_user as auth_user_repo
+import fhionnghaile_auth.repository.auth_user_role as auth_user_role_repo
 
 def save_auth_user(auth_user):
     return to_response(
@@ -17,6 +18,9 @@ def get_auth_user_by_user_id(auth_user_id):
             auth_user_id
         )
     )
+
+def get_roles_by_user_id(auth_user_id):
+    return auth_user_role_repo.get_roles_by_user_id(auth_user_id)
 
 def get_auth_user_by_name(user_name):
     return to_response(
