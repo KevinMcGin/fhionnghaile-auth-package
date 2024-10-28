@@ -4,6 +4,12 @@ import requests
 import os
 import time
 
+# start: for sqlalchemy db refresh
+import fhionnghaile_auth.repository.auth_user
+import fhionnghaile_auth.repository.auth_user_role
+import fhionnghaile_auth.repository.auth_role
+import fhionnghaile_auth.repository.anonymous_user
+# end: for sqlalchemy db refresh
 
 def token_required(authentication_required=False):
     def get_current_user(headers, authentication_required):
