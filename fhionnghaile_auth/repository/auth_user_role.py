@@ -6,7 +6,7 @@ class AuthUserRole(db.Model):
     __tablename__ = 'inf_auth_user_role'
     auth_user_role_id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     auth_role = db.Column(db.String(100), db.ForeignKey('inf_auth_role.auth_role'))
-    auth_user_id = db.Column(UUID(as_uuid=True), db.ForeignKey('inf_auth_user.auth_user_id'))
+    auth_user_id = db.Column(db.String(1000), db.ForeignKey('inf_auth_user.auth_user_id'))
 
     def __init__(
         self, 
