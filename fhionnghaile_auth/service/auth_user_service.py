@@ -20,7 +20,8 @@ def get_auth_user_by_user_id(auth_user_id):
     )
 
 def get_roles_by_user_id(auth_user_id):
-    return auth_user_role_repo.get_roles_by_user_id(auth_user_id)
+    roles = auth_user_role_repo.get_roles_by_user_id(auth_user_id)
+    return [role.auth_role for role in roles]
 
 def get_auth_user_by_name(user_name):
     return to_response(
