@@ -11,7 +11,10 @@ import fhionnghaile_auth.repository.auth_role
 import fhionnghaile_auth.repository.anonymous_user
 # end: for sqlalchemy db refresh
 
-def token_required(authentication_required=False):
+def token_required(
+    authentication_required=False,
+    role_required=None,
+):
     def get_current_user(headers, authentication_required):
         AUTH_SERVICE_URL = os.environ.get('AUTH_SERVICE_URL', 'http://localhost:8885')
         auth_uri = AUTH_SERVICE_URL + "/api/auth"
@@ -67,6 +70,12 @@ def token_required(authentication_required=False):
         @wraps(f)
         def wrapper(*args, **kwargs):
             current_user=get_current_user(request.headers, authentication_required)
+            if "error" in current_user:
+                return current_user, 401
+            if role_required is not None and \
+                "auth" in current_user and \
+                role_required not in current_user.get("auth").get("roles"):
+                return current_user, 403
             return f(current_user, *args, **kwargs)
         return wrapper
     return decorator
