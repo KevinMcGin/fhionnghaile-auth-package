@@ -71,10 +71,12 @@ def token_required(
         def wrapper(*args, **kwargs):
             current_user=get_current_user(request.headers, authentication_required)
             if "error" in current_user:
+                print("Error: current_user has error:", current_user)
                 return current_user, 401
             if role_required is not None and \
                 "auth" in current_user and \
                 role_required not in current_user.get("auth").get("roles"):
+                print("Error: current_user has no role:", role_required, "for user:", current_user)
                 return current_user, 403
             return f(current_user, *args, **kwargs)
         return wrapper
