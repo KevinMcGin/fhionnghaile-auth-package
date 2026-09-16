@@ -14,6 +14,11 @@ import fhionnghaile_auth.repository.anonymous_user
 def token_required(
     authentication_required=False,
     role_required=None,
+    # Identifies which app is calling, so the central auth service can
+    # auto-grant that app's default user role to a first-time caller instead
+    # of leaving them permanently 403'd until someone grants it by hand.
+    # Left as None for callers that don't want that behaviour.
+    app_name=None,
 ):
     def get_current_user(headers, authentication_required):
         AUTH_SERVICE_URL = os.environ.get('AUTH_SERVICE_URL', 'http://localhost:8885')
@@ -29,10 +34,11 @@ def token_required(
             while status_code > auth_fail_status and attempts < maxAttempts:
                 attempts += 1
                 current_user_response = requests.post(
-                    auth_uri, 
+                    auth_uri,
                     headers={
                         "Authorization": headers.get("Authorization"),
                         "Anonymous-User-Id": headers.get("Anonymous-User-Id"),
+                        "App-Name": app_name,
                     },
                     timeout=30,
                 )

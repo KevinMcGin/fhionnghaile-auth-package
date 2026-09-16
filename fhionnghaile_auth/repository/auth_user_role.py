@@ -24,3 +24,15 @@ def get_roles_by_user_id(auth_user_id):
     ).filter_by(
         auth_user_id=auth_user_id
     ).all()
+
+def add_role_to_user(auth_user_id, auth_role):
+    existing = AuthUserRole.query.filter_by(
+        auth_user_id=auth_user_id,
+        auth_role=auth_role,
+    ).first()
+    if existing is not None:
+        return existing
+    role = AuthUserRole(uuid.uuid4(), auth_role, auth_user_id)
+    db.session.add(role)
+    db.session.commit()
+    return role

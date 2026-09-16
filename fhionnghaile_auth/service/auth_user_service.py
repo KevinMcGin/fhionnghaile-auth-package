@@ -23,6 +23,13 @@ def get_roles_by_user_id(auth_user_id):
     roles = auth_user_role_repo.get_roles_by_user_id(auth_user_id)
     return [role.auth_role for role in roles]
 
+# Grants a role if the user doesn't already have it - used to auto-provision
+# an app's default user role on first login, so a new user isn't stuck
+# forbidden until someone manually grants them access.
+def ensure_role(auth_user_id, auth_role):
+    auth_user_role_repo.add_role_to_user(auth_user_id, auth_role)
+    return get_roles_by_user_id(auth_user_id)
+
 def get_auth_user_by_name(user_name):
     return to_response(
         auth_user_repo.get_auth_user_by_name(user_name)
